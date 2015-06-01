@@ -18,6 +18,10 @@ def get_path(page, settings):
         if not prefix.endswith('/'): prefix += '/'
         if path.startswith(prefix):
             return path[len(prefix):-1]
+    for prefix in sorted(settings['PAGE_PATHS'], key=len, reverse=True):
+        if not prefix.endswith('\\'): prefix += '\\'
+        if path.startswith(prefix):
+            return path[len(prefix):-1]
     raise UnexpectedException('Page outside of PAGE_PATHS ?!?')
 
 def in_default_lang(page):
